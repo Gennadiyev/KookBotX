@@ -4,7 +4,7 @@
 
 ## Features
 
-- **Simple yet easy-to-maintain project structure.** While you still get your working hello world function in 4 lines, scaling up is much easier.
+- **Simple & easy-to-maintain project structure.** While you still get your working hello world function in 4 lines, scaling up is much easier.
 
 ```python
 def init(_bot: Bot):
@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ```
 
 > [!WARNING]  
-> KookBotX is built upon a customized `khl.py` - we modified some code in the library. We are not associated with the original author of `khl.py`. If you use this version of `khl.py`, please refrain from contacting the original author of khl.py with issues related to this modified version.
+> KookBot X is built upon a customized `khl.py` - we modified some code in the library. We are not associated with the original author of `khl.py`. If you use this version of `khl.py`, please refrain from contacting the original author of khl.py with issues related to this modified version.
 
 ### Running the bot
 

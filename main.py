@@ -1,6 +1,6 @@
 #
 #
-#  KookBotX: A khl.py-based micro-framework to build your KOOK bot
+#  KookBot X: A khl.py-based micro-framework to build your KOOK bot
 # 
 #  Please check https://github.com/Gennadiyev/KookBotX for license and more.
 # 

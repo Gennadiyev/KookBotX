@@ -9,7 +9,7 @@
 ```python
 def init(_bot: Bot):
     @_bot.command(name="hello")
-    async def dice(msg, *args):
+    async def hello_world(msg, *args):
         await msg.reply("... world!")
 ```
 

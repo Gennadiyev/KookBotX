@@ -13,14 +13,14 @@ def init(_bot: Bot):
         await msg.reply("... world!")
 ```
 
-- **Lots of examples** for you to get started, ranging from a plethora of LLMs to music streaming, from file serving to a currency system.
+- **Lots of examples** to help you get started, including a wide range of applications from LLMs to music streaming and from file serving to currency systems.
 - **Easy to use and maintain.** The framework is designed to be easy to use and maintain. You can never get lost in your codebase.
 
 ## Quick Start
 
 ### Prerequisites
 
-Python 3.10 or higher is required to run this framework.
+Python 3.9 or higher is required to run this framework. The project is developed and tested on Python 3.9.2, but it should work on any Python 3.9+ version.
 
 Run the following command to install the required packages:
 
@@ -29,19 +29,38 @@ pip install -r requirements.txt
 ```
 
 > [!WARNING]  
-> KookBot X is built upon a customized `khl.py` - we modified some code in the library. We are not associated with the original author of `khl.py`. If you use this version of `khl.py`, please refrain from contacting the original author of khl.py with issues related to this modified version.
+> Please note: KookBot X uses a customized version of khl.py. We've made modifications to the library and are not affiliated with its original author. For issues related to this customized version, please do not contact the original author of khl.py.
 
 ### Running the bot
 
-On Linux, run:
+On Linux, simply run:
 
+```bash
+KOOKBOT_WS_TOKEN='<REPLACE_WITH_YOUR_BOT_TOKEN>' python3 main.py
 ```
-TOKEN=<REPLACE_WITH_YOUR_BOT_TOKEN> python3 main.py
+
+On Windows, run:
+
+```powershell
+$env:KOOKBOT_WS_TOKEN='<REPLACE_WITH_YOUR_BOT_TOKEN>'; python main.py
 ```
+
+> [!INFO]
+> Make sure to replace `<REPLACE_WITH_YOUR_BOT_TOKEN>` with your own bot token. Grab a token from [KOOK developer platform](https://developer.kookapp.cn/bot). Never share your bot token with anyone. It's like a password to your bot.
+
+If you see a success message, congratulations! You have successfully set up your bot. Now send some message to a shared channel with your bot to see it in action.
+
+Set `KOOKBOTX_DEBUG=1` to see debug messages logged to the log file (default: `logs/kookbotx.log`).
+
+### Database setup (coming soon)
+
+Database integration is planned in future updates.
+
+<!-- ~~Several example modules use databases to store data. We recommend using SQLite for development and PostgreSQL for production.~~ No examples use databases at the moment. -->
 
 ## Contributing
 
-We welcome contributions from the community, whether it's some improvements to code structure, a utility module, or more examples. Please read the [contributing guide](#) to get started.
+We welcome contributions from the community, whether it's some improvements to code structure, a utility module, or more examples. Please read the [contributing guide](#CONTRIBUTING.md) to get started.
 
 ### Credits
 

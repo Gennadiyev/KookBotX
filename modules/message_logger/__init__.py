@@ -4,7 +4,8 @@ Message logger does a simple job: log incoming messages to the console. Many fie
 """
 
 import os
-from khl import EventTypes, Bot, Event, Message
+
+from khl import Bot, Event, EventTypes, Message
 from loguru import logger
 
 

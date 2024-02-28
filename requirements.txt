@@ -1,0 +1,16 @@
+aiohttp
+aiosignal
+async-timeout
+beautifulsoup4
+colorama
+Flask
+fonttools
+khl.py
+loguru
+numpy
+orjson
+Pillow
+pydantic
+pydantic_core
+requests
+tqdm

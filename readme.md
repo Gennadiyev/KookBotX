@@ -45,7 +45,7 @@ On Windows, run:
 $env:KOOKBOT_WS_TOKEN='<REPLACE_WITH_YOUR_BOT_TOKEN>'; python main.py
 ```
 
-> [!INFO]
+> [!NOTE]
 > Make sure to replace `<REPLACE_WITH_YOUR_BOT_TOKEN>` with your own bot token. Grab a token from [KOOK developer platform](https://developer.kookapp.cn/bot). Never share your bot token with anyone. It's like a password to your bot.
 
 If you see a success message, congratulations! You have successfully set up your bot. Now send some message to a shared channel with your bot to see it in action.

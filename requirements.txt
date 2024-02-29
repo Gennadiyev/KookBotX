@@ -1,7 +1,7 @@
 aiohttp
 aiosignal
 async-timeout
-beautifulsoup4
+bs4
 colorama
 Flask
 fonttools

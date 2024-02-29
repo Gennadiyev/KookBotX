@@ -1,0 +1,8 @@
+{
+    "proxy": "http://localhost:8080",
+    "gpt-4": {
+        "api_key": "sk-************************************************",
+        "model_name": "gpt-4-turbo-preview",
+        "proxy": "http://127.0.0.1:8080"
+    }
+}

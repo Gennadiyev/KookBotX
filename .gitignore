@@ -1,6 +1,8 @@
+.vscode
+
 logs
 start.sh
-
+config.json
 
 *.pyc
 *.pyo

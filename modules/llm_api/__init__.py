@@ -9,18 +9,19 @@ from khl import Bot, Event, Message
 from khl.api import Message as MessageAPI
 
 from .llm_base import LLM, LLMReturnChunk
-from .openai_api import GPT4
+from .openai_api import GPT4o
 import os
 
 DEBUG_FLAG = os.environ.get("KOOKBOTX_DEBUG") == "1"
 
-llm_GPT4 = GPT4()
+llm_GPT4o = GPT4o()
 
 
 class LLMStopGeneration(Exception):
     pass
 
 
+@logger.catch
 async def call_llm(
     bot: Bot, msg: Message, llm: LLM, command: str, update_per_modification: int = 5
 ):
@@ -29,7 +30,6 @@ async def call_llm(
         await msg.reply("Please provide a prompt for the LLM.")
         return
 
-
     try:
         await msg.add_reaction("☕")
         ret = await msg.reply(f"Querying `{llm.name}`...")
@@ -37,7 +37,6 @@ async def call_llm(
         gate = msg.gate
         response_text = ""
         modifications = 0
-
         async for chunk in llm.query(prompt):
             if chunk.has_error:
                 raise Exception(chunk.error_info)
@@ -57,30 +56,32 @@ async def call_llm(
                 MessageAPI.update(msg_id=msg_id, content=response_text.strip())
             )
         else:
-            await msg.reply("(No response from the LLM.)")
+            await msg.reply("(No response from `{llm.name}`)")
         await msg.delete_reaction("☕")
         await msg.add_reaction("✅")
         return
     except Exception as e:
         await msg.delete_reaction("☕")
         await msg.add_reaction("❌")
-        logger.warning(
-            "Error caught when processing command {} (LLM: {})",
-            command,
-            llm.name if hasattr(llm, "name") else llm,
-        )
-        logger.warning("{}: {}", e.__class__.__name__, e)
         if DEBUG_FLAG:
             logger.exception(
                 "Error caught when processing command {} (LLM: {})",
                 command,
                 llm.name if hasattr(llm, "name") else llm,
             )
+            raise e  # will be caught by loguru.logger.catch
+        else:
+            logger.warning(
+                "Error caught when processing command {} (LLM: {})",
+                command,
+                llm.name if hasattr(llm, "name") else llm,
+            )
+            logger.warning("{}: {}", e.__class__.__name__, e)
         return
 
 
 def init(_bot: Bot):
 
-    @_bot.command("gpt")
-    async def gpt_4(msg: Message, *args):
-        await call_llm(_bot, msg, llm_GPT4, command="/gpt")
+    @_bot.command("kbx")
+    async def gpt_4o(msg: Message, *args):
+        await call_llm(_bot, msg, llm_GPT4o, command="/kbx")

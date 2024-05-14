@@ -19,10 +19,10 @@ from loguru import logger
 from .llm_base import LLM, LLMReturnChunk
 
 
-class GPT4(LLM):
+class GPT4o(LLM):
     def __init__(self):
         super().__init__(
-            "gpt-4"
+            "gpt-4o"
         )  # self.config should be populated with the corresponding configuration
         self.build_client()
 
@@ -38,14 +38,12 @@ class GPT4(LLM):
             return
         if proxy:
             httpx_client = AsyncClient(proxies=proxy)
-            self.client = AsyncOpenAI(
-                api_key=api_key, http_client=httpx_client
-            )
+            self.client = AsyncOpenAI(api_key=api_key, http_client=httpx_client)
         else:
             self.client = AsyncOpenAI(api_key=self.config["api_key"])
 
     async def query(self, query_str: str) -> AsyncIterator[LLMReturnChunk]:
-        """Query GPT-4 with the given query string, streaming the response back in chunks."""
+        """Query GPT-4o with the given query string, streaming the response back in chunks."""
         if self.client is None:
             yield LLMReturnChunk(
                 has_error=True,
@@ -53,9 +51,9 @@ class GPT4(LLM):
                 content="An error occurred.",
             )
             return
-        # Simulating sending a query to GPT-4 and receiving streamed responses
+        # Simulating sending a query to GPT-4o and receiving streamed responses
         response = await self.client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model=self.config.get("model_name", "gpt-4o"),
             messages=[{"role": "user", "content": query_str}],
             temperature=0.3,
             stream=True,
@@ -75,18 +73,19 @@ class GPT4(LLM):
                     yield LLMReturnChunk(
                         should_stop=True,
                         content=delta_content,
-                        stop_reason=should_finish
+                        stop_reason=should_finish,
                     )
                     break
                 else:
                     # Otherwise, send the content chunk and continue
-                    yield LLMReturnChunk(
-                        should_stop=False, content=delta_content
-                    )
+                    yield LLMReturnChunk(should_stop=False, content=delta_content)
 
             except Exception as e:
                 # Handle any exceptions by sending an error chunk
                 yield LLMReturnChunk(
-                    should_stop=True, has_error=True, error_info=str(e), content="An error occurred."
+                    should_stop=True,
+                    has_error=True,
+                    error_info=str(e),
+                    content="An error occurred.",
                 )
                 break

@@ -64,6 +64,10 @@ class KookBotX:
                 else:
                     logger.warning("Skipping file {}: not a .py file", module_p)
                 continue
+            # Check if .kbxignore exists
+            if (module_p / ".nomodule.kbx").exists():
+                logger.info("Skipping {} (.nomodule.kbx exists)", module_name)
+                continue
             try:
                 module = importlib.import_module(module_name)
             except Exception as e:
